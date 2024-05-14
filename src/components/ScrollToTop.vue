@@ -5,24 +5,23 @@
 </template>
 <script>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-
+import { debounce } from 'lodash';
 export default {
   setup() {
-    const showButton = ref(true);
+    const showButton = ref(false);
 
     // 检测滚动事件，显示或隐藏按钮
     const handleScroll = () => {
-      console.log(window.scrollY)
       showButton.value = window.scrollY > 100;
     };
 
     // 滚动到页面顶部
-    const scrollToTop = () => {
+    const scrollToTop = debounce(() => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth' // 平滑滚动
       });
-    };
+    }, 0.1);
 
     // 添加滚动事件监听器
     onMounted(() => {

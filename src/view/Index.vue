@@ -1,15 +1,28 @@
 <script setup>
-import {inject, ref} from 'vue';
-import ThemeChange from "@/components/ThemeChange.vue";
 import ScrollToTop from "@/components/ScrollToTop.vue";
-let theme = inject('theme');
+import Header from "@/components/Header.vue";
+import LeftBody from "@/components/LeftBody.vue";
+import MainBody from "@/components/MainBody.vue";
 
 
 </script>
 
 <template>
-  <div style="height: 1000px;"></div>
-  <ThemeChange :theme="theme" ></ThemeChange>
+  <div class="flex flex-col h-screen">
+    <Header></Header>
+    <main class="flex flex-1 w-full">
+      <LeftBody class="hidden md:block w-auto  h-full"></LeftBody>
+      <MainBody class="w-full md:max-w-3xl mx-auto px-4"></MainBody>
+    </main>
+  </div>
+
+
+
+
+
+
+
+
   <ScrollToTop class="fixed bottom-4 right-4"></ScrollToTop>
 </template>
 
