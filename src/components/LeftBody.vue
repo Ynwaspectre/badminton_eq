@@ -1,20 +1,75 @@
 <script setup>
-
 import WaveLine from "@/assets/icons/WaveLine.vue";
+import Racket from "@/components/LeftIcons/Racket.vue";
+import Shoes from "@/components/LeftIcons/Shoes.vue";
+import Bag from "@/components/LeftIcons/Bag.vue";
+import Strings from "@/components/LeftIcons/Strings.vue";
+import Ball from "@/components/LeftIcons/Ball.vue";
+import Clothes from "@/components/LeftIcons/Clothes.vue";
+import HandGlue from "@/components/LeftIcons/HandGlue.vue";
+import Accessory from "@/components/LeftIcons/Accessory.vue";
+import Equipment from "@/components/LeftIcons/Equipment.vue";
+
+const iconList = [
+  {
+    title: '羽毛球拍',
+    componentName: Racket,
+    selected:true
+  },
+  {
+    title: '羽毛球鞋',
+    componentName: Shoes,
+    selected:false
+  },
+  {
+    title: '运动包',
+    componentName: Bag,
+    selected:false
+  },
+  {
+    title: '羽毛球线',
+    componentName:Strings,
+    selected:false
+  },
+  {
+    title: '羽毛球',
+    componentName: Ball,
+    selected:false
+  },
+  {
+    title: '运动服饰',
+    componentName: Clothes,
+    selected:false
+  },
+  {
+    title: '手胶',
+    componentName: HandGlue,
+    selected:false
+  },
+  {
+    title: '运动配件',
+    componentName: Accessory,
+    selected:false
+  },
+  {
+    title: '器材设备',
+    componentName: Equipment,
+    selected:false
+  },
+];
+
+
 </script>
 
 <template>
-  <div class="flex flex-col  p-6 ">
-    <div class="flex items-center  w-full p-3 text-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24">
-        <path fill="#eab308"
-              d="M14.828 11.322c-1.865 3.133-5.338 4.618-7.981 3.505L3.769 20L2 19.01l3.198-5.375C3.58 11.778 3.464 8.622 5.1 5.873c1.974-3.318 5.752-4.787 8.438-3.282a4.551 4.551 0 0 1 1.742 1.748a5.55 5.55 0 0 1 .64 1.87c.254 1.596-.091 3.43-1.092 5.113Zm-.841-4.003a4.64 4.64 0 0 0-.01-.31c-.083-1.274-.686-2.265-1.462-2.7a2.466 2.466 0 0 0-.778-.269v7.938c.07-.06.137-.122.205-.186c.41-.392.798-.872 1.14-1.447c.64-1.075.903-2.113.904-3.026Zm-3.98 5.667c.222-.075.445-.168.667-.283l.042-.022V4.024c-.655.085-1.364.346-2.042.816v8.36a3.97 3.97 0 0 0 1.334-.214Zm-2.594-.1c.076.042.156.08.24.115V5.746a6.93 6.93 0 0 0-.808 1.104c-1.637 2.751-.808 5.265.568 6.035Z"/>
-        <path fill="#eab308"
-              d="M16.716 14.681c-.91.48-1.837.61-2.586.462c-1.122.912-2.412 1.57-3.754 1.873L8 21.01l1.769.99l3.078-5.172c2.643 1.113 6.116-.372 7.98-3.505c1.974-3.317 1.397-7.226-1.29-8.731a4.693 4.693 0 0 0-2.175-.589c.283.654.467 1.354.56 2.077c.215.053.415.13.593.23c1.375.77 2.205 3.285.568 6.035a6.646 6.646 0 0 1-1.346 1.634v-4.6a10.402 10.402 0 0 1-1.02 2.67v2.633Z"/>
-      </svg>
-      <span class="ml-4">球拍
-      <wave-line></wave-line>
-      </span>
+  <div>
+    <div v-for="item in iconList" :key="item.title"
+        class="w-full h-14 flex items-center justify-start pl-8 pt-2 pb-2   cursor-pointer  hover:bg-gray-200 dark:hover:bg-slate-800">
+      <component :is="item.componentName" ></component>
+      <div class="ml-3 text-lg  text-gray-400 font-thin cursor-pointer hover:text-black ">
+        {{item.title}}
+        <WaveLine v-if="item.selected"></WaveLine>
+      </div>
     </div>
 
 
