@@ -17,7 +17,7 @@ categoryStore.setCategory(category)
 <template>
   <Header class="sticky top-0 left-0 backdrop-blur-sm  z-2"></Header>
   <LeftBody class="hidden md:block  md:w-72  fixed  h-full z-10 pt-6 pr-2 pl-2 " ></LeftBody>
-  <MainBody class="ml-0 md:ml-72  h-full  p-2 z-10 min-h-full" ></MainBody>
+  <MainBody class="ml-0 md:ml-72 h-auto  p-2 z-10" ></MainBody>
   <ScrollToTop class="fixed bottom-4 right-4"></ScrollToTop>
 </template>
 

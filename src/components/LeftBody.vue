@@ -15,6 +15,7 @@ import Equipment from "@/components/LeftIcons/Equipment.vue";
 import {useRouter} from 'vue-router';
 import {useCategoryStore} from "@/stores/categoryStore.js";
 import {useLoadingStore} from "@/stores/loadingStore.js";
+import ScrollToTop from "@/components/ScrollToTop.vue";
 
 const categoryStore = useCategoryStore();
 const loadingStore = useLoadingStore();
@@ -99,8 +100,13 @@ const navTo = async (i, c) => {
   }
   index = i
   isLock = false
-  setTimeout(function (){ loadingStore.setLoading(false)},2000)
+
+  setTimeout(function () {
+    loadingStore.setLoading(false)
+  }, 2000)
 }
+
+
 </script>
 
 <template>
@@ -114,8 +120,6 @@ const navTo = async (i, c) => {
         <WaveLine v-if="category===item.c"></WaveLine>
       </div>
     </div>
-
-
   </div>
 </template>
 

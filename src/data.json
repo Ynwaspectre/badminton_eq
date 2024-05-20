@@ -1,0 +1,41 @@
+{
+  "rackets": [
+    {
+      "cover": "/src/assets/result.png",
+      "name": "100zz（古红色）",
+      "other_names": "",
+      "tags": [
+        "YONEX",
+        "天斧系列",
+        "操控"
+      ],
+      "date": "2021年6月",
+      "rate": "9.6",
+      "rate_value": "100",
+      "hot": "14232",
+      "detail": {}
+    },
+    {
+      "cover": "/src/assets/result.png",
+      "name": "100zz（古红色）",
+      "tags": [
+        "YONEX",
+        "天斧系列",
+        "操控"
+      ],
+      "date": "2021年6月",
+      "rate": "9.6",
+      "rate_value": "100",
+      "hot": "14232",
+      "detail": {}
+    }
+  ],
+  "shoes": [],
+  "bag": [],
+  "ball": [],
+  "clothes": [],
+  "equipment": [],
+  "handglue": [],
+  "strings": [],
+  "accessory": []
+}
