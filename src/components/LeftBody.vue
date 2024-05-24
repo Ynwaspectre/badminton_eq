@@ -1,5 +1,5 @@
 <script setup>
-import {ref, toRef} from "vue";
+import {ref, toRef, computed} from "vue";
 
 
 import WaveLine from "@/assets/icons/WaveLine.vue";
@@ -15,7 +15,9 @@ import Equipment from "@/components/LeftIcons/Equipment.vue";
 import {useRouter} from 'vue-router';
 import {useCategoryStore} from "@/stores/categoryStore.js";
 import {useLoadingStore} from "@/stores/loadingStore.js";
-import ScrollToTop from "@/components/ScrollToTop.vue";
+import {indexOf} from "lodash";
+import {f} from "../../dist/assets/index-DAYEFA0D.js";
+
 
 const categoryStore = useCategoryStore();
 const loadingStore = useLoadingStore();
@@ -71,7 +73,11 @@ const iconList = [
   },
 ];
 const router = useRouter();
-let index = 0
+
+// 初始化当前index
+const currentIndex = computed(() => {
+  return iconList.findIndex(item => item.c === category.value);
+});
 
 
 function sleep(ms) {
@@ -80,30 +86,29 @@ function sleep(ms) {
 
 let isLock = false;
 
-const navTo = async (i, c) => {
-  if (isLock) return
-  if (i === index) return
+const navTo = async (targetIndex, c) => {
+  if (isLock || targetIndex === currentIndex) return
   isLock = true
   await router.push({name: 'Index', params: {c: c}});
-  categoryStore.setCategory(iconList[i].c)
+  categoryStore.setCategory(iconList[targetIndex].c)
+
   loadingStore.setLoading(true)
-  if (i > index) { //i=3  index =0   那就遍历 0到3
-    for (let j = index; j <= i; j++) {
+  if (targetIndex > currentIndex.value) { //i=3  index =0   那就遍历 0到3
+    for (let j = currentIndex.value; j <= targetIndex; j++) {
       category.value = iconList[j].c
       await sleep(120);
     }
   } else {  //i=0 index=3  遍历3 到0
-    for (let j = index; j >= i; j--) {
+    for (let j = currentIndex.value; j >= targetIndex; j--) {
       category.value = iconList[j].c
       await sleep(120);
     }
   }
-  index = i
+  currentIndex.value = targetIndex
   isLock = false
-
-  setTimeout(function () {
+  setTimeout(function (){
     loadingStore.setLoading(false)
-  }, 2000)
+  },1000)
 }
 
 
