@@ -167,10 +167,64 @@
       "detail": {}
     }
   ],
-  "ball": [],
-  "clothes": [],
-  "equipment": [],
-  "handglue": [],
-  "strings": [],
-  "accessory": []
+  "ball": [{
+    "zy_id": 1,
+    "cover": "https://www.badmintoncn.com/cbo_eq/upload/202010/m_20201018155418MtFJmU2IZl.jpg?imageView2/1/w/300/h/300/q/80",
+    "name": "AS-05",
+    "brand": "尤尼克斯",
+    "line": "",
+    "other_names": "AS05 AS-05EX",
+    "date": "未知",
+    "rate": "8.6",
+    "detail": {}
+  }],
+  "clothes": [{
+    "zy_id": 1,
+    "cover": "https://www.badmintoncn.com/cbo_eq/upload/202307/m_202307311609418OD69kzkRk.jpg?imageView2/1/w/300/h/300/q/80",
+    "name": "110353BCR/210353BCR",
+    "brand": "尤尼克斯",
+    "line": "",
+    "other_names": "110353BCR 210353BCR",
+    "date": "未知",
+    "rate": "8.6",
+    "detail": {}
+  }],
+  "handglue": [  {
+    "zy_id": 1,
+    "cover": "https://www.badmintoncn.com/cbo_eq/upload/202201/m_202201151405288mi2RDkeMN.jpg?imageView2/1/w/300/h/300/q/80",
+    "name": "AC-102C",
+    "brand": "尤尼克斯",
+    "line": "手胶/平面皮胶",
+    "other_names": "AC102C AC102",
+    "date": "未知",
+    "rate": "9.2",
+    "detail": {}
+  }],
+  "strings": [
+    {
+      "zy_id": 1,
+
+      "cover": "https://ezbox.com.au/wp-content/uploads/2019/08/Yonex-BG80_Single_Pack_Lin_Dan_Limited-2-scaled.jpg",
+      "name": "BG-80",
+      "brand": "尤尼克斯",
+      "line": "高弹性",
+      "other_names": "BG80 BG80CH 80线",
+      "date": "未知",
+      "rate": "8.6",
+      "detail": {}
+    }
+  ],
+  "accessory": [
+    {
+      "zy_id": 1,
+      "cover": "https://www.badmintoncn.com/cbo_eq/upload/202205/s_20220520115104VF3kX2VXXL.jpg",
+      "name": "145092BCR",
+      "brand": "尤尼克斯",
+      "line": "运动配件/球袜",
+      "other_names": "",
+      "date": "2022年",
+      "rate": "",
+      "detail": {}
+    }
+  ]
 }

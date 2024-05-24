@@ -16,7 +16,7 @@ import {useRouter} from 'vue-router';
 import {useCategoryStore} from "@/stores/categoryStore.js";
 import {useLoadingStore} from "@/stores/loadingStore.js";
 import {indexOf} from "lodash";
-import {f} from "../../dist/assets/index-DAYEFA0D.js";
+
 
 
 const categoryStore = useCategoryStore();
@@ -65,12 +65,7 @@ const iconList = [
     title: '运动配件',
     componentName: Accessory,
     c: 'accessory'
-  },
-  {
-    title: '器材设备',
-    componentName: Equipment,
-    c: 'equipment'
-  },
+  }
 ];
 const router = useRouter();
 
@@ -91,8 +86,10 @@ const navTo = async (targetIndex, c) => {
   isLock = true
   await router.push({name: 'Index', params: {c: c}});
   categoryStore.setCategory(iconList[targetIndex].c)
-
   loadingStore.setLoading(true)
+  setTimeout(function (){
+    loadingStore.setLoading(false)
+  },500)
   if (targetIndex > currentIndex.value) { //i=3  index =0   那就遍历 0到3
     for (let j = currentIndex.value; j <= targetIndex; j++) {
       category.value = iconList[j].c
@@ -106,9 +103,7 @@ const navTo = async (targetIndex, c) => {
   }
   currentIndex.value = targetIndex
   isLock = false
-  setTimeout(function (){
-    loadingStore.setLoading(false)
-  },1000)
+
 }
 
 

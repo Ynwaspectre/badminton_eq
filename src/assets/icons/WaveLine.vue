@@ -4,7 +4,7 @@
 
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0.00 0.00 321.00 39.00"
-       class="text-green-600 " style="width: 6rem;height: 1rem"><path fill="currentColor" d="
+       class="text-red-300 " style="width: 6rem;height: 1rem"><path fill="currentColor" d="
   M 181.70 10.80
   A 0.89 0.88 -35.4 0 0 182.73 10.97
   C 188.65 7.98 194.55 4.49 200.92 2.48

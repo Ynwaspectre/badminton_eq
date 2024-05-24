@@ -11,13 +11,13 @@ const category = router.params.c;
 
 const categoryStore = useCategoryStore();
 categoryStore.setCategory(category)
-console.log(123123123)
+console.log('index.vue')
 </script>
 
 <template>
   <Header class="sticky top-0 left-0 backdrop-blur-sm  z-2"></Header>
-  <LeftBody class="hidden md:block  md:w-72  fixed  h-full z-10 pt-6 pr-2 pl-2 "></LeftBody>
-  <MainBody class="ml-0 md:ml-72 h-auto  p-2 z-10"></MainBody>
+  <LeftBody class="hidden xl:block  xl:w-72  fixed  h-full z-10 pt-6 pr-2 pl-2 "></LeftBody>
+  <MainBody class="ml-0 xl:ml-72 h-auto  p-2 z-10 min-w-40"></MainBody>
   <ScrollToTop class="fixed bottom-4 right-4"></ScrollToTop>
 </template>
 

@@ -1,5 +1,5 @@
 <script setup>
-console.log(123)
+console.log('app.vue')
 </script>
 
 <template>

@@ -29,102 +29,62 @@ watch(category, (newValue, oldValue) => {
 <template>
   <div>
 
-<!--    <Loading class="fixed top-1/3 left-1/2" v-if="loading"></Loading>-->
+    <Loading class="fixed top-1/3 left-1/2" v-if="loading"></Loading>
 
     <div class=" w-full  p-4 pb-32 mb-20">
       <div class="masonry-wrapper">
-        <div class="masonry  gap-4 columns-2  xs:columns-1 md:columns-4 lg:5">
-          <!--          羽毛球拍-->
-          <div class="break-inside-avoid mb-4 rounded shadow-md  cursor-pointer p-4 bg-gray-50 dark:bg-slate-800"
-               v-for="item in list" v-if="category === 'rackets'">
-            <img v-lazy="item.cover" class="rounded w-full transition duration-300 ease-in-out hover:brightness-125" :alt="item.name">
-            <div class="gap-2 flex flex-wrap p-2">
-              <div class="badge badge-default text-sm" v-for="item1 in item.tags">{{ item1 }}</div>
-            </div>
-            <div class="p-1">
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-bold ">名称：{{ item.name }}</div>
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium ">品牌：{{ item.brand }}</div>
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium ">系列：{{ item.line }}</div>
-              <div class="text-slate-900  dark:text-white text-sm pl-2 mt-1 font-medium">上市时间：{{ item.date }}</div>
-              <div class="flex items-center mt-1">
-                <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium">评分：</div>
-                <div class="rating rating-xs rating-half">
-                  <template v-for="i in (Math.floor((item.rate) / 2))">
-                    <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
-                    <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-2 "/>
-                  </template>
-                  <input v-if="(item.rate % 2)>=1" type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
-                </div>
-                <div class="ml-2 text-sm text-slate-900  dark:text-white font-bold">{{ item.rate }}</div>
+        <div class="masonry gap-4 xl:columns-5 lg:columns-4 sm:columns-2  md:columns-3 ">
+          <template v-if="!loading">
+            <!--          羽毛球拍-->
+            <div class="break-inside-avoid mb-4 rounded shadow-md  cursor-pointer p-4 bg-gray-50 dark:bg-slate-800"
+                 v-for="item in list" >
+              <img v-lazy="item.cover" class="rounded w-full transition duration-300 ease-in-out hover:brightness-125"
+                   :alt="item.name">
+              <div class="gap-2 flex flex-wrap pl-1 pb-1 pt-2 pr-1" v-if="item.tags">
+                <div class="badge badge-default text-sm" v-for="item1 in item.tags">{{ item1 }}</div>
               </div>
-              <div class="flex items-center mt-1">
-                <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium ">
-                  <div class="tooltip" data-tip="热度">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16">
-                      <path fill="#e11d48"
-                            d="M8 16c3.314 0 6-2 6-5.5c0-1.5-.5-4-2.5-6c.25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6c-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75c0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5c-.179 1-.25 2 1 3c.625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/>
-                    </svg>
+              <div class="pt-1 pb-1">
+                <div class="text-slate-900 dark:text-white pl-2 text-sm font-bold ">名称：{{ item.name }}</div>
+                <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1">品牌：{{ item.brand }}</div>
+                <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1" v-if="item.line">系列：{{ item.line }}</div>
+                <div class="text-slate-900  dark:text-white text-sm pl-2 mt-1 font-medium ">上市时间：{{
+                    item.date
+                  }}
+                </div>
+                <div class="flex items-center mt-1" v-if="item.rate">
+                  <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium">评分：</div>
+                  <div class="rating rating-xs rating-half">
+                    <template v-for="i in (Math.floor((item.rate) / 2))">
+                      <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
+                      <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-2 "/>
+                    </template>
+                    <input v-if="(item.rate % 2)>=1" type="radio" name="rating-10"
+                           class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
                   </div>
+                  <div class="ml-2 text-sm text-slate-900  dark:text-white font-bold">{{ item.rate }}</div>
                 </div>
-                <progress
-                    :class="{ progress: true, 'w-2/3': true, 'ml-1': true, 'progress-error': item.hot_rate >= 80, 'progress-warning': item.hot_rate <= 30, 'progress-success': item.hot_rate > 30 && item.hot_rate < 80 }"
-                    :value="item.hot" max="5000"></progress>
-                <div class="ml-2 text-xs text-slate-900  dark:text-white font-bold">{{ item.hot }}</div>
+                <div class="flex items-center mt-1" v-if="item.hot">
+                  <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium ">
+                    <div class="tooltip" data-tip="热度">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16">
+                        <path fill="#e11d48"
+                              d="M8 16c3.314 0 6-2 6-5.5c0-1.5-.5-4-2.5-6c.25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6c-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75c0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5c-.179 1-.25 2 1 3c.625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <progress
+                      :class="{ progress: true, 'w-2/3': true, 'ml-1': true, 'progress-error': item.hot_rate >= 80, 'progress-warning': item.hot_rate <= 30, 'progress-success': item.hot_rate > 30 && item.hot_rate < 80 }"
+                      :value="item.hot" max="5000"></progress>
+                  <div class="ml-2 text-xs text-slate-900  dark:text-white font-bold">{{ item.hot }}</div>
+                </div>
               </div>
             </div>
-          </div>
-
-
-
-          <!-- Shoes-->
-          <div class="break-inside-avoid mb-4 rounded shadow-md  cursor-pointer p-4 bg-gray-50 dark:bg-slate-800"
-               v-for="item in list" v-if="category==='shoes'">
-            <img v-lazy="item.cover" class="rounded-xl w-full transition duration-300 ease-in-out hover:brightness-125" :alt="item.name">
-            <div class="p-1 mt-1">
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-bold ">名称：{{ item.name }}</div>
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium ">品牌：{{ item.brand }}</div>
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium ">系列：{{ item.line }}</div>
-              <div class="text-slate-900  dark:text-white text-sm pl-2 mt-1 font-medium">上市时间：{{ item.date }}</div>
-              <div class="flex items-center mt-1">
-                <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium">评分：</div>
-                <div class="rating rating-xs rating-half">
-                  <template v-for="i in (Math.floor((item.rate) / 2))">
-                    <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
-                    <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-2 "/>
-                  </template>
-                  <input v-if="(item.rate % 2)>=1" type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
-                </div>
-                <div class="ml-2 text-sm text-slate-900  dark:text-white font-bold">{{ item.rate }}</div>
-              </div>
-            </div>
-          </div>
-<!--          bag-->
-          <div class="break-inside-avoid mb-4 rounded shadow-md  cursor-pointer p-4 bg-gray-50 dark:bg-slate-800"
-               v-for="item in list" v-if="category==='bag'">
-            <img v-lazy="item.cover" class="rounded-xl w-full transition duration-300 ease-in-out hover:brightness-125" :alt="item.name">
-            <div class="p-1 mt-1">
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-bold ">名称：{{ item.name }}</div>
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium ">品牌：{{ item.brand }}</div>
-              <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium " v-if="item.line!==''">系列：{{ item.line }}</div>
-              <div class="text-slate-900  dark:text-white text-sm pl-2 mt-1 font-medium">上市时间：{{ item.date }}</div>
-              <div class="flex items-center mt-1">
-                <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium">评分：</div>
-                <div class="rating rating-xs rating-half">
-                  <template v-for="i in (Math.floor((item.rate) / 2))">
-                    <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
-                    <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-2 "/>
-                  </template>
-                  <input v-if="(item.rate % 2)>=1" type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400 mask-half-1 "/>
-                </div>
-                <div class="ml-2 text-sm text-slate-900  dark:text-white font-bold">{{ item.rate }}</div>
-              </div>
-            </div>
-          </div>
-          <!-- 更多项目 -->
+            <!-- 更多项目 -->
+          </template>
         </div>
       </div>
     </div>
-    <Footer></Footer>
+    <Footer v-if="!loading"></Footer>
   </div>
 </template>
 
