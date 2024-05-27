@@ -7,6 +7,7 @@ import {useLoadingStore} from "@/stores/loadingStore.js";
 import {computed, ref, onMounted, watch} from "vue";
 import jsonData from '@/data.json';
 
+
 const categoryStore = useCategoryStore()
 const loadingStore = useLoadingStore()
 const category = computed(() => {
@@ -20,16 +21,41 @@ let list = ref(jsonData[category.value])
 
 watch(category, (newValue, oldValue) => {
   console.log(newValue, oldValue)
+  loadComponent(category.value).then(module => {
+    currentComponent.value = module.default;
+    currentKey.value++; // 改变key值以强制重新渲染组件
+  });
   list.value = jsonData[category.value]
 })
+
+const loadComponent = (componentName) => {
+  console.log('加载'+componentName+'组件')
+  componentName=componentName.charAt(0).toUpperCase() + componentName.slice(1)+"Modal";
+  return import(`@/components/Modals/${componentName}.vue`);
+}
+
+const showModal = () => {
+  console.log(category.value)
+  document.getElementById(category.value).showModal()
+}
+
+const currentComponent = ref(null);
+const currentKey = ref(0);
+loadComponent(category.value).then(module => {
+  currentComponent.value = module.default;
+  currentKey.value++; // 改变key值以强制重新渲染组件
+});
 
 
 </script>
 
 <template>
   <div>
-
+    <!--    加载组件-->
     <Loading class="fixed top-1/3 left-1/2" v-if="loading"></Loading>
+
+    <component :is="currentComponent" :key="currentKey"></component>
+
 
     <div class=" w-full  p-4 pb-32 mb-20">
       <div class="masonry-wrapper">
@@ -37,8 +63,8 @@ watch(category, (newValue, oldValue) => {
           <template v-if="!loading">
             <!--          羽毛球拍-->
             <div class="break-inside-avoid mb-4 rounded shadow-md  cursor-pointer p-4 bg-gray-50 dark:bg-slate-800"
-                 v-for="item in list" >
-              <img v-lazy="item.cover" class="rounded w-full transition duration-300 ease-in-out hover:brightness-125"
+                 v-for="item in list" @click="showModal()">
+              <img v-lazy="item.cover" class="rounded w-full transition duration-300 ease-in-out hover:brightness-105"
                    :alt="item.name">
               <div class="gap-2 flex flex-wrap pl-1 pb-1 pt-2 pr-1" v-if="item.tags">
                 <div class="badge badge-default text-sm" v-for="item1 in item.tags">{{ item1 }}</div>
@@ -46,7 +72,9 @@ watch(category, (newValue, oldValue) => {
               <div class="pt-1 pb-1">
                 <div class="text-slate-900 dark:text-white pl-2 text-sm font-bold ">名称：{{ item.name }}</div>
                 <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1">品牌：{{ item.brand }}</div>
-                <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1" v-if="item.line">系列：{{ item.line }}</div>
+                <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1" v-if="item.line">
+                  系列：{{ item.line }}
+                </div>
                 <div class="text-slate-900  dark:text-white text-sm pl-2 mt-1 font-medium ">上市时间：{{
                     item.date
                   }}

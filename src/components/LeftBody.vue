@@ -11,11 +11,10 @@ import Ball from "@/components/LeftIcons/Ball.vue";
 import Clothes from "@/components/LeftIcons/Clothes.vue";
 import HandGlue from "@/components/LeftIcons/HandGlue.vue";
 import Accessory from "@/components/LeftIcons/Accessory.vue";
-import Equipment from "@/components/LeftIcons/Equipment.vue";
 import {useRouter} from 'vue-router';
 import {useCategoryStore} from "@/stores/categoryStore.js";
 import {useLoadingStore} from "@/stores/loadingStore.js";
-import {indexOf} from "lodash";
+
 
 
 
