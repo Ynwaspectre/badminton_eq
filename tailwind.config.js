@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      zIndex: {
+        '999': '999',
+      }
+    },
     screens: {
       sm: '640px',
       md: '768px',

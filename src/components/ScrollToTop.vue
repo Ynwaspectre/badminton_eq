@@ -16,12 +16,12 @@ export default {
     };
 
     // 滚动到页面顶部
-    const scrollToTop = debounce(() => {
+    const scrollToTop = ()=>{
       window.scrollTo({
         top: 0,
         behavior: 'smooth' // 平滑滚动
       });
-    }, 0);
+    }
 
     // 添加滚动事件监听器
     onMounted(() => {

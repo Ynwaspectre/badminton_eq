@@ -16,8 +16,6 @@ import {useCategoryStore} from "@/stores/categoryStore.js";
 import {useLoadingStore} from "@/stores/loadingStore.js";
 
 
-
-
 const categoryStore = useCategoryStore();
 const loadingStore = useLoadingStore();
 
@@ -86,9 +84,9 @@ const navTo = async (targetIndex, c) => {
   await router.push({name: 'Index', params: {c: c}});
   categoryStore.setCategory(iconList[targetIndex].c)
   loadingStore.setLoading(true)
-  setTimeout(function (){
+  setTimeout(function () {
     loadingStore.setLoading(false)
-  },500)
+  }, 500)
   if (targetIndex > currentIndex.value) { //i=3  index =0   那就遍历 0到3
     for (let j = currentIndex.value; j <= targetIndex; j++) {
       category.value = iconList[j].c
@@ -102,9 +100,7 @@ const navTo = async (targetIndex, c) => {
   }
   currentIndex.value = targetIndex
   isLock = false
-
 }
-
 
 </script>
 
@@ -114,7 +110,8 @@ const navTo = async (targetIndex, c) => {
          class="w-full h-14 flex items-center justify-start pl-8 pt-2 pb-2   cursor-pointer
            hover:bg-gray-200 dark:hover:bg-slate-800">
       <component :is="item.componentName"></component>
-      <div class="ml-3 text-lg  text-gray-400 font-thin cursor-pointer hover:text-black dark:hover:text-white">
+      <div
+          class="ml-3 font-mono font-bold  text-gray-600 dark:text-gray-100 cursor-pointer hover:text-black dark:hover:text-white">
         {{ item.title }}
         <WaveLine v-if="category===item.c"></WaveLine>
       </div>
