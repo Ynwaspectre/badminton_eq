@@ -16,8 +16,8 @@ console.log('index.vue')
 
 <template>
   <Header class="sticky top-0 left-0 backdrop-blur-sm  z-[999]"></Header>
-  <LeftBody class="hidden xl:block  xl:w-64  fixed  h-full z-10 pt-6 pr-2 pl-2 "></LeftBody>
-  <MainBody class="ml-0 xl:ml-64 h-auto  p-2 z-10 min-w-40"></MainBody>
+  <LeftBody class="w-60  fixed  h-full z-10 pt-6 pr-2 pl-2 "></LeftBody>
+  <MainBody class="ml-60 h-auto  p-2 z-10 min-w-40"></MainBody>
   <ScrollToTop class="fixed bottom-4 right-4"></ScrollToTop>
 </template>
 

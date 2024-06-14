@@ -1,5 +1,5 @@
 <template>
-  <div class="loader-container">
+  <div class="loader-container z-[1000]">
     <div class="loader-child"></div>
     <div class="loader-child"></div>
     <div class="loader-child"></div>

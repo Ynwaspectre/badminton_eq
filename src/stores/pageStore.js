@@ -1,15 +1,15 @@
 // stores/counterStore.js
 import { defineStore } from 'pinia';
 
-export const useLoadingStore = defineStore('loading', {
+export const usePageStore = defineStore('page', {
     state: () => {
         return {
-            loading: true
+            page: 1
         };
     },
     actions: {
-        setLoading(newLoading) {
-            this.loading=newLoading;
+        setPage(newPage) {
+            this.page=newPage;
         },
 
     }

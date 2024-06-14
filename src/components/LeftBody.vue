@@ -14,10 +14,13 @@ import Accessory from "@/components/LeftIcons/Accessory.vue";
 import {useRouter} from 'vue-router';
 import {useCategoryStore} from "@/stores/categoryStore.js";
 import {useLoadingStore} from "@/stores/loadingStore.js";
+import {usePageStore} from "@/stores/pageStore.js";
+import Footer from "@/components/Footer.vue";
 
 
 const categoryStore = useCategoryStore();
 const loadingStore = useLoadingStore();
+const pageStore = usePageStore();
 
 let category = ref(categoryStore.category)
 
@@ -79,28 +82,41 @@ function sleep(ms) {
 let isLock = false;
 
 const navTo = async (targetIndex, c) => {
-  if (isLock || targetIndex === currentIndex) return
-  isLock = true
-  await router.push({name: 'Index', params: {c: c}});
-  categoryStore.setCategory(iconList[targetIndex].c)
-  loadingStore.setLoading(true)
-  setTimeout(function () {
-    loadingStore.setLoading(false)
-  }, 500)
-  if (targetIndex > currentIndex.value) { //i=3  index =0   那就遍历 0到3
-    for (let j = currentIndex.value; j <= targetIndex; j++) {
-      category.value = iconList[j].c
-      await sleep(120);
+  if (isLock || targetIndex === currentIndex) return;
+  isLock = true;
+
+  // 封装第二部分代码为独立的异步函数
+  const secondPart = async () => {
+    categoryStore.setCategory(iconList[targetIndex].c);
+    loadingStore.setLoading(true);
+    pageStore.setPage(1);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // 平滑滚动
+    });
+  };
+
+  // 第一部分代码
+  const firstPart = async () => {
+    await router.push({ name: 'Index', params: { c: c } });
+    if (targetIndex > currentIndex.value) { // i=3 index=0 那就遍历 0到3
+      for (let j = currentIndex.value; j <= targetIndex; j++) {
+        category.value = iconList[j].c;
+        await sleep(120);
+      }
+    } else { // i=0 index=3 遍历3 到0
+      for (let j = currentIndex.value; j >= targetIndex; j--) {
+        category.value = iconList[j].c;
+        await sleep(120);
+      }
     }
-  } else {  //i=0 index=3  遍历3 到0
-    for (let j = currentIndex.value; j >= targetIndex; j--) {
-      category.value = iconList[j].c
-      await sleep(120);
-    }
-  }
-  currentIndex.value = targetIndex
-  isLock = false
-}
+  };
+
+  // 同时启动第一部分和第二部分代码
+  await Promise.all([firstPart(), secondPart()]);
+
+  isLock = false;
+};
 
 </script>
 
@@ -116,6 +132,7 @@ const navTo = async (targetIndex, c) => {
         <WaveLine v-if="category===item.c"></WaveLine>
       </div>
     </div>
+    <Footer v-if="!loading"></Footer>
   </div>
 </template>
 

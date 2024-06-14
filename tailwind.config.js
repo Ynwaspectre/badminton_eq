@@ -8,6 +8,7 @@ export default {
     extend: {
       zIndex: {
         '999': '999',
+        '1000': '1000',
       }
     },
     screens: {
