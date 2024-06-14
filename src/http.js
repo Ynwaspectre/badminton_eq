@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: 'http://testymq/api/', // 替换为你的 API 基础 URL
+    baseURL: 'http://ymqapi.ynwaspectre.cn/api/', // 替换为你的 API 基础 URL
     timeout: 10000, // 请求超时时间
     headers: {
         'Content-Type': 'application/json',
