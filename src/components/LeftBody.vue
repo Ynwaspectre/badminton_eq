@@ -84,6 +84,7 @@ let isLock = false;
 const navTo = async (targetIndex, c) => {
   if (isLock || targetIndex === currentIndex) return;
   isLock = true;
+  console.log('123')
 
   // 封装第二部分代码为独立的异步函数
   const secondPart = async () => {

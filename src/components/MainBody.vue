@@ -18,7 +18,7 @@ import HandGlueModal from "@/components/Modals/HandGlueModal.vue";
 import AccessoryModal from "@/components/Modals/AccessoryModal.vue";
 
 
-const modalList =shallowRef(    {
+const modalList = shallowRef({
       rackets: RacketsModal,
       shoes: ShoesModal,
       bag: BagModal,
@@ -31,9 +31,8 @@ const modalList =shallowRef(    {
 )
 
 
-
 const
-http = inject('http');
+    http = inject('http');
 
 const categoryStore = useCategoryStore()
 const loadingStore = useLoadingStore()
@@ -72,7 +71,8 @@ watch(category, (newValue, oldValue) => {
 })
 
 
-const showTheModal = () => {
+const showTheModal = (index) => {
+  currentIndex.value=index
   console.log(category.value)
   console.log('show modal')
   document.getElementById(category.value).showModal()
@@ -82,6 +82,9 @@ const showTheModal = () => {
 
 const redrawVueMasonry = inject('redrawVueMasonry');
 
+setInterval(function () {
+  redrawVueMasonry()
+}, 1200)
 
 const getList = async () => {
   try {
@@ -97,17 +100,21 @@ const getList = async () => {
   }
   loading.value = false
   nextPageLoading.value = false
+
 }
 
 getList()
 
+const currentIndex=ref(0)
 
 const showLightbox = ref(false)
 
-let imageList = ref([])
+const imageList = ref([
+])
 const showImage = (images) => {
+  console.log(images)
   showLightbox.value = true
-  imageList.value = images
+  // imageList.value = images
 }
 
 const nextPage = () => {
@@ -118,21 +125,7 @@ const nextPage = () => {
 }
 
 
-const imageLoaded = () => {
-  imageLoadedCount++
-}
 
-setInterval(function () {
-  if (imageLoadedCount === list.value.length) {
-    console.log(imageLoadedCount, list.value.length)
-    redrawVueMasonry()
-  }
-}, 500)
-
-
-setInterval(function () {
-  redrawVueMasonry()
-}, 1000)
 
 
 //标签
@@ -153,7 +146,10 @@ tagsColor.value = shuffle(tagsColor.value)
     <!--    加载组件-->
     <Loading class="fixed top-1/3 left-1/2" v-if="loading"></Loading>
 
-    <component :is="modalList[category]"></component>
+    <template v-if="list.length>0">
+      <component :is="modalList[category]" :detail="list[currentIndex].detail"></component>
+    </template>
+
 
     <vue-easy-lightbox
         :visible="showLightbox"
@@ -167,11 +163,11 @@ tagsColor.value = shuffle(tagsColor.value)
       <!--      <BrandAndLine></BrandAndLine>-->
       <div v-masonry horizontal-order="true" gutter="0" fit-width="true">
         <!--          羽毛球拍-->
-        <div v-masonry-tile v-for="item in list"
+        <div v-masonry-tile v-for="(item,index) in list"
              class="w-60 break-inside-avoid mt-2 rounded shadow-md ml-2  p-3 bg-gray-50 dark:bg-slate-800"
         >
-          <img v-lazy="item.cover" @load="imageLoaded" @click="showImage(item.images)"
-               class="rounded w-full cursor-pointer transition duration-300 ease-in-out hover:brightness-110"
+          <img v-lazy="item.cover"  @click="showImage(item.images)"
+               class="rounded w-full cursor-pointer transition duration-300 ease-in-out hover:brightness-110  hover:scale-105"
                :alt="item.name">
           <div class="gap-2 flex flex-wrap pl-1 pb-1 pt-2 pr-1" v-if="item.tags">
             <div :class="{'badge':true,[tagsColor[i]]:true, 'badge-sm':true}" v-for="(item1,i) in item.tags">
@@ -179,7 +175,7 @@ tagsColor.value = shuffle(tagsColor.value)
             </div>
           </div>
           <div class="pb-1">
-            <div @click="showTheModal()"
+            <div @click="showTheModal(index)"
                  class="text-slate-900 break-all  dark:text-white pl-2 text-sm font-bold cursor-pointer hover:underline underline-offset-4 decoration-2 decoration-dotted">
               名称：{{ item.name }}
             </div>
@@ -205,7 +201,7 @@ tagsColor.value = shuffle(tagsColor.value)
               </div>
               <div class="ml-2 text-sm text-slate-900  dark:text-white font-bold">{{ item.rate }}</div>
             </div>
-            <div class="flex items-center mt-1" v-if="item.hot">
+            <div class="flex items-center mt-1" v-if="item.hot && category==='rackets'">
               <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium ">
                 <div class="tooltip" data-tip="热度">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 16 16">
@@ -224,7 +220,9 @@ tagsColor.value = shuffle(tagsColor.value)
         <!-- 更多项目 -->
       </div>
     </div>
-    <div class="text-center text-sm cursor-pointer pb-4 hover:text-gray-400 hover:font-bold" v-if="!loading" @click="nextPage">查看更多</div>
+    <div class="text-center text-sm cursor-pointer pb-4 hover:text-gray-400 hover:font-bold" v-if="!loading"
+         @click="nextPage">查看更多
+    </div>
     <div class="flex justify-center items-center">
       <span class="loading loading-spinner loading-md" v-if="nextPageLoading"></span>
     </div>
