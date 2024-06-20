@@ -64,7 +64,7 @@ let imageLoadedCount = 0;
 //选择分类后触发
 watch(category, (newValue, oldValue) => {
   console.log(newValue, oldValue)
-
+  currentIndex.value=0
   list.value = []
   imageLoadedCount = 0;
   getList()
@@ -176,19 +176,19 @@ tagsColor.value = shuffle(tagsColor.value)
           </div>
           <div class="pb-1">
             <div @click="showTheModal(index)"
-                 class="text-slate-900 break-all  dark:text-white pl-2 text-sm font-bold cursor-pointer hover:underline underline-offset-4 decoration-2 decoration-dotted">
+                 class="text-slate-900 break-all  dark:text-white pl-1 text-sm font-bold cursor-pointer hover:underline underline-offset-4 decoration-2 decoration-dotted">
               名称：{{ item.name }}
             </div>
-            <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1">品牌：{{ item.brand }}</div>
-            <div class="text-slate-900 dark:text-white pl-2 text-sm font-medium mt-1" v-if="item.line">
+            <div class="text-slate-900 dark:text-white pl-1 text-sm font-medium mt-1">品牌：{{ item.brand }}</div>
+            <div class="text-slate-900 dark:text-white pl-1 text-sm font-medium mt-1" v-if="item.line">
               系列：{{ item.line }}
             </div>
-            <div class="text-slate-900  dark:text-white text-sm pl-2 mt-1 font-medium " v-if="item.date">上市时间：{{
+            <div class="text-slate-900  dark:text-white text-sm pl-1 mt-1 font-medium " v-if="item.date">上市时间：{{
                 item.date
               }}
             </div>
             <div class="flex items-center mt-1" v-if="item.rate">
-              <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium">评分：</div>
+              <div class="text-slate-900  dark:text-white text-sm pl-1 font-medium">评分：</div>
               <div class="rating rating-xs rating-half">
                 <template v-for="i in (Math.floor((item.rate) / 2))">
                   <input type="radio" disabled name="rating-10"
@@ -202,7 +202,7 @@ tagsColor.value = shuffle(tagsColor.value)
               <div class="ml-2 text-sm text-slate-900  dark:text-white font-bold">{{ item.rate }}</div>
             </div>
             <div class="flex items-center mt-1" v-if="item.hot && category==='rackets'">
-              <div class="text-slate-900  dark:text-white text-sm pl-2 font-medium ">
+              <div class="text-slate-900  dark:text-white text-sm pl-1 font-medium ">
                 <div class="tooltip" data-tip="热度">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 16 16">
                     <path fill="#e11d48"

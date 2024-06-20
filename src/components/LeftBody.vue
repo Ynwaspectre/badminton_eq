@@ -82,7 +82,7 @@ function sleep(ms) {
 let isLock = false;
 
 const navTo = async (targetIndex, c) => {
-  if (isLock || targetIndex === currentIndex) return;
+  if (isLock || targetIndex === currentIndex.value) return;
   isLock = true;
   console.log('123')
 
@@ -133,7 +133,7 @@ const navTo = async (targetIndex, c) => {
         <WaveLine v-if="category===item.c"></WaveLine>
       </div>
     </div>
-    <Footer v-if="!loading"></Footer>
+    <Footer ></Footer>
   </div>
 </template>
 
