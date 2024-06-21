@@ -11,7 +11,7 @@ const handleThemeChange = (e) => {
 </script>
 
 <template>
-  <div class="flex items-center justify-start shadow-md h-20 sticky ">
+  <div class="flex items-center justify-start shadow-md h-20 ">
     <svg t="1715845533085" class="icon w-10 h-10 ml-10 cursor-pointer" viewBox="0 0 1024 1024" version="1.1"
       xmlns="http://www.w3.org/2000/svg" p-id="38338" >
       <path
