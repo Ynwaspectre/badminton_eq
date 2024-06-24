@@ -24,7 +24,7 @@ console.log(detail)
       </h3>
       <div class="divider"></div>
       <div class="flex flex-row ">
-        <div>
+        <div class="w-1/2">
           <div class="p-1 text-sm ">
             <span class="font-bold">品牌系列：</span>
             <span class="ml-2 font-medium dark:text-gray-300">{{ detail.brand }}-{{ detail.line }}</span>
@@ -58,7 +58,7 @@ console.log(detail)
             <span class="ml-2 dark:text-gray-300 font-medium">{{ detail.param5 }}</span>
           </div>
         </div>
-        <div class="flex-1 ml-4">
+        <div class="w-1/2">
           <div role="tablist" class="tabs tabs-boxed bg-gray-200 text-gray-600 dark:bg-slate-700 tabs-xs">
             <a role="tab" :class="{'tab':true,'tab-active':currentIndex===0}" @click="currentIndex=0">
               <svg t="1718930720130" class="icon w-4 h-4" viewBox="0 0 1024 1024" version="1.1"
@@ -108,23 +108,17 @@ console.log(detail)
               <span class="ml-1 text-sm">小红书</span>
             </a>
           </div>
-          <div class="min-h-40">
-<!--            <Empty class="mt-16"></Empty>-->
+          <div>
+            <Empty class="mt-16"></Empty>
 <!--            <div class="flex justify-center items-center mt-16">-->
 <!--              <span class="loading loading-spinner loading-md" ></span>-->
 <!--            </div>-->
-            <div class="p-1"> <a target="_blank" href="https://www.baidu.com/link?url=mvADw2y4X7GeQn7y5neDNbflLs5D_JPra70GNpE-hu0I4ZoKsVH94s8U_EJg5qlMMZ5_Lcv--FcYuydaBcahZ_&wd=&eqid=a072e155000ddd1e000000046675207c" class="link link-hover">I'm a simple link</a></div>
-            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>
-            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>
-            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>
-            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>
-            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>
-          </div>
-          <div class="w-full ">
-            <div class="join ml-auto mr-1">
-              <button class="join-item btn btn-xs bg-gray-200 text-gray-600 dark:bg-slate-700">«</button>
-              <button class="join-item btn btn-xs bg-gray-200 text-gray-600 dark:bg-slate-700">»</button>
-            </div>
+<!--            <div class="p-1"> <a target="_blank" href="https://www.baidu.com/link?url=mvADw2y4X7GeQn7y5neDNbflLs5D_JPra70GNpE-hu0I4ZoKsVH94s8U_EJg5qlMMZ5_Lcv&#45;&#45;FcYuydaBcahZ_&wd=&eqid=a072e155000ddd1e000000046675207c" class="link link-hover">I'm a simple link</a></div>-->
+<!--            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>-->
+<!--            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>-->
+<!--            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>-->
+<!--            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>-->
+<!--            <div class="p-1"> <a target="_blank" class="link link-hover">I'm a simple link</a></div>-->
           </div>
         </div>
       </div>
